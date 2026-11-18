@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06060a">
+<title>五女一 · FIVE GIRLS ONE｜IVE·aespa·i-dle·LE SSERAFIM·NewJeans 人气统计</title>
+<meta name="description" content="用五个可复核维度，统计 IVE、aespa、i-dle、LE SSERAFIM、NewJeans 共 24 位成员的人气，并给每个人颁一个奖。">
+<link rel="stylesheet" href="app.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2306060a'/%3E%3Ctext x='16' y='23' font-size='18' font-family='sans-serif' font-weight='900' fill='%23fff' text-anchor='middle'%3E%E4%BA%94%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">五女一 <em>FIVE&nbsp;GIRLS&nbsp;ONE</em></div>
+    <button class="music-pill" id="musicToggle" aria-label="播放或暂停背景音乐" aria-pressed="false">
+      <span class="eq"><i></i><i></i><i></i></span>
+      <span class="txt" id="musicToggleLabel">BANG BANG</span>
+    </button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#method">方法</a>
+      <a href="#board">总榜</a>
+      <a href="#groups">五团</a>
+      <a href="#awards">颁奖</a>
+      <a href="#history">年表</a>
+      <a href="#music">音乐</a>
+      <a href="#play">互动</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="wrap hero-inner">
+      <div class="hero-top">
+        <span>2026 · 数据快照 <span class="dot">●</span> 11 / 18</span>
+        <span>5 GROUPS · 24 MEMBERS · 5 METRICS</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="ch">五</span><span class="ch">女</span><span class="ch">一</span>
+        <span class="num">/01</span>
+      </h1>
+      <p class="hero-kr">다섯 팀, 한 명의 정상</p>
+      <p class="hero-sub">
+        IVE、aespa、i-dle、LE SSERAFIM、NewJeans —— 五个女团，二十四个人，
+        一个吵了五年还没结论的问题：<b>到底谁最火？</b><br>
+        这里不靠感觉，也不靠投票堆数量。五个可回溯的维度，一套公开的权重，一个你能自己动手改的答案。
+      </p>
+      <div class="hero-facts" id="heroFacts"></div>
+      <div class="ticker"><div class="ticker-track" id="ticker"></div></div>
+    </div>
+  </section>
+
+  <!-- ============ 方法论 ============ -->
+  <section class="section" id="method">
+    <div class="wrap">
+      <div class="eyebrow reveal">01 — Method</div>
+      <h2 class="title reveal">先说清楚怎么算，<br>再回答谁最火。</h2>
+      <p class="lede reveal">
+        网上关于「谁最火」的指标多到互相打架：品牌声誉、直拍播放、IG 粉丝、代言数量、中输、打投……
+        它们各自都对，但单独拎一个出来都会失真。这里的做法是——<strong>五个维度，各自归一化到 0–100，再按权重合成</strong>，
+        并在页面上把每一个原始数字和它的出处摊开给你看。
+      </p>
+
+      <div class="method-grid">
+        <div class="metric-list" id="metricList"></div>
+        <aside class="weights">
+          <h3>自己改权重</h3>
+          <p class="hint">拖动滑块，总榜会实时重排。默认值就是本页的「客观基准」，改成你自己的直觉也行——分歧本身也是结论的一部分。</p>
+          <div class="presets" id="presets"></div>
+          <div id="sliders"></div>
+          <div class="weights-foot" id="weightFoot"></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 总榜 ============ -->
+  <section class="section" id="board">
+    <div class="wrap">
+      <div class="board-head">
+        <div>
+          <div class="eyebrow reveal">02 — The Board</div>
+          <h2 class="title reveal" style="margin-bottom:10px">五女一总榜</h2>
+          <p class="lede reveal" id="boardLead"></p>
+        </div>
+        <div class="board-meta" id="boardMeta"></div>
+      </div>
+      <div class="podium reveal" id="podium"></div>
+      <div class="rank-list reveal" id="rankList"></div>
+      <p style="font-size:11.5px;color:var(--ink-faint);margin-top:18px;line-height:1.7" class="reveal">
+        点击任意一行查看完整拆解：五项原始数据、雷达图、以及她那一座奖。
+        分数会随左侧权重实时变化；名次波动来自模型，不来自数据。
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 五团 ============ -->
+  <section class="section" id="groups">
+    <div class="wrap">
+      <div class="eyebrow reveal">03 — Five Teams</div>
+      <h2 class="title reveal">团内的王，和团里的每个人</h2>
+      <p class="lede reveal">
+        跨团比较容易被「出道年份」和「团体体量」带偏，所以这里再拆一层：<strong>同一个团里，谁最能打</strong>。
+        每个团都有一张自己的秩序表。
+      </p>
+      <div class="gtabs reveal" id="gtabs"></div>
+      <div id="gpanels"></div>
+    </div>
+  </section>
+
+  <!-- ============ 颁奖 ============ -->
+  <section class="section" id="awards">
+    <div class="wrap">
+      <div class="eyebrow reveal">04 — Awards</div>
+      <h2 class="title reveal">2026 五女一颁奖礼</h2>
+      <p class="lede reveal">
+        上面那栏是<strong>数据算出来的正式奖</strong>，分数变了它就会变；
+        下面那栏是<strong>给每个人的民间野奖</strong>——不按人气发，按她最像她自己的那部分发。
+        二十四个人，一个都不落。
+      </p>
+      <div class="awards-split">
+        <div class="reveal">
+          <div class="award-sub"><h3>正式奖</h3><span>由当前权重的分数自动生成</span></div>
+          <div class="formal-grid" id="formalAwards"></div>
+        </div>
+        <div class="reveal">
+          <div class="award-sub"><h3>民间野奖</h3><span>24 / 24 全勤，人手一座</span></div>
+          <div class="fun-grid" id="funAwards"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 年表 ============ -->
+  <section class="section" id="history">
+    <div class="wrap">
+      <div class="eyebrow reveal">05 — Timeline</div>
+      <h2 class="title reveal">她们是怎么走到今天的</h2>
+      <p class="lede reveal">
+        人气不是凭空出现的。每一个现在的数字，都能在某一年找到一个拐点。
+        横向滑动查看各团大事记。
+      </p>
+      <div id="timelines" style="margin-top:38px"></div>
+    </div>
+  </section>
+
+  <!-- ============ 音乐 ============ -->
+  <section class="section" id="music">
+    <div class="wrap">
+      <div class="eyebrow reveal">06 — Discography</div>
+      <h2 class="title reveal">五首入门，一团体一首</h2>
+      <p class="lede reveal">每团五首代表作，点一下跳到 YouTube 搜索或 Spotify。下面这台播放器是本地的《BANG BANG》——断网也能听。</p>
+
+      <div class="track reveal" id="trackCard">
+        <button class="track-btn" id="trackBtn" aria-label="播放 BANG BANG">
+          <span class="ico-play">▶</span><span class="ico-pause">❚❚</span>
+        </button>
+        <div class="track-meta">
+          <div class="track-kicker">打开即播放 · 顶部可暂停</div>
+          <div class="track-title">BANG BANG</div>
+          <div class="track-sub">IVE · 2026 · 正规二辑《REVIVE+》先行曲</div>
+        </div>
+        <div class="track-right">
+          <div class="track-progress" id="trackBar"><i id="trackFill"></i></div>
+          <div class="track-time" id="trackTime">0:00 / --:--</div>
+        </div>
+      </div>
+      <p class="track-note">打开页面即尝试自动播放；若浏览器拦截（Chrome/Safari 的常规策略），第一次触摸、滚动或点击时自动开始，无需按任何按钮。顶部「BANG BANG」按钮随时暂停。音源文件由你提供，仅作个人试听；版权归 IVE 与 Starship Entertainment 所有。</p>
+
+      <div class="song-groups" id="songs"></div>
+    </div>
+  </section>
+
+  <!-- ============ 互动 ============ -->
+  <section class="section" id="play">
+    <div class="wrap">
+      <div class="eyebrow reveal">07 — Playground</div>
+      <h2 class="title reveal">轮到你了</h2>
+      <p class="lede reveal">统计能算出「谁被最多人看见」，但算不出「谁最戳你」。这部分留给你。</p>
+      <div class="play-grid">
+        <div class="panel reveal">
+          <h3>你的应援榜</h3>
+          <p class="sub">点一下给谁加一票（再点一次取消）。只存在你这台设备上，不上传、不打扰别人。</p>
+          <div class="vote-pool" id="votePool"></div>
+          <div class="vote-readout" id="voteReadout"></div>
+          <div class="vote-share">
+            <button class="btn solid" id="shareBtn">生成我的战报</button>
+            <button class="btn" id="clearVote">清空</button>
+          </div>
+        </div>
+        <div class="panel reveal">
+          <h3>随机抽一位</h3>
+          <p class="sub">选择困难症专用。抽到谁，就去看她那一座野奖。</p>
+          <div class="gacha-stage" id="gacha">
+            <div class="placeholder">按下按钮，看命</div>
+          </div>
+          <div style="margin-top:14px"><button class="btn solid" id="gachaBtn">抽一位成员</button></div>
+        </div>
+        <div class="panel reveal" style="grid-column:1/-1">
+          <h3>你该追哪个团？· 六题测试</h3>
+          <p class="sub">不测「谁最火」，测「你会喜欢谁」。答案只是一个入口，不是判决。</p>
+          <div id="quiz"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand">五女一<span>FIVE GIRLS ONE — A FAN-MADE STATS PAGE</span></div>
+        <p class="foot-note" style="margin-top:20px">
+          本页为个人兴趣项目，非官方、非商业。所有成员照片来自 Wikimedia Commons，
+          依 CC BY / CC BY-SA 授权使用，作者与授权信息见下方「图片授权」。
+          品牌声誉、粉丝数等数据均为公开信息整理，采集日期 2026-11-18；
+          模型权重、归一化方式、估算规则全部公开，欢迎质疑。
+          <br><span style="opacity:.7">版本 v4 · 2026-11-18 · 打开即播，顶部可暂停</span>
+        </p>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:14px">数据来源</div>
+        <ul class="src-list" id="srcList" style="padding-left:16px;margin:0"></ul>
+      </div>
+    </div>
+    <div class="credit" id="credit"></div>
+  </div>
+</footer>
+
+<!-- 抽屉 -->
+<div class="drawer-scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <button class="drawer-close" id="drawerClose" aria-label="关闭">✕</button>
+  <div class="drawer-scroll" id="drawerBody"></div>
+</aside>
+
+<!-- 音频元素刻意不带 src：页面加载时没有任何音源，任何浏览器都无法自动播放。
+     src 只在用户点击播放时由 JS 赋上。 -->
+<audio id="trackAudio" preload="none" data-src="assets/audio/bang-bang.mp3"></audio>
+
+<!-- 音频：打开页面即尝试播放；src 由 JS 在播放时赋值 -->
+<audio id="trackAudio" preload="none" data-src="assets/audio/bang-bang.mp3"></audio>
+
+<script src="data.js"></script>
+<script src="pv.js"></script>
+<script src="credits.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
